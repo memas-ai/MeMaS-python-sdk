@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "memas-sdk"
-VERSION = "1.0.0"
+VERSION = "0.1.0"
 # To install the library, run the following
 #
 # python setup.py install
@@ -36,7 +36,7 @@ setup(
     description="MeMaS CP APIs",
     author="OpenAPI Generator community",
     author_email="max.yu@memas.ai",
-    url="",
+    url="https://github.com/memas-ai/MeMaS-python-sdk",
     keywords=["OpenAPI", "OpenAPI-Generator", "MeMaS CP APIs"],
     python_requires=">=3.7",
     install_requires=REQUIRES,
@@ -44,6 +44,6 @@ setup(
     include_package_data=True,
     license="Apache 2.0",
     long_description="""\
-    This is the Control Plane APIs for MeMaS (Memory Management Service).  # noqa: E501
+    This is the Control Plane client for MeMaS (Memory Management Service). See https://github.com/memas-ai/MeMaS for more details.  # noqa: E501
     """
 )
