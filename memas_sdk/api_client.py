@@ -2,7 +2,7 @@
 """
     MeMaS CP APIs
 
-    This is the Control Plane APIs for MeMaS (Memory Management Service).  # noqa: E501
+    This is the Control Plane client for MeMaS (Memory Management Service).  See https://github.com/memas-ai/MeMaS for more details.  # noqa: E501
 
     The version of the OpenAPI document: 0.1.0
     Contact: max.yu@memas.ai
@@ -1004,7 +1004,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.0.0/python'
+        self.user_agent = 'OpenAPI-Generator/0.1.1/python'
 
     def __enter__(self):
         return self

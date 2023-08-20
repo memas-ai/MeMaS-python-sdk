@@ -34,12 +34,17 @@ class SchemaForRequestBodyApplicationJson(
 
 
     class MetaOapg:
+        required = {
+            "namespace_pathname",
+        }
         
         class properties:
             namespace_pathname = schemas.StrSchema
             __annotations__ = {
                 "namespace_pathname": namespace_pathname,
             }
+    
+    namespace_pathname: MetaOapg.properties.namespace_pathname
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["namespace_pathname"]) -> MetaOapg.properties.namespace_pathname: ...
@@ -53,7 +58,7 @@ class SchemaForRequestBodyApplicationJson(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["namespace_pathname"]) -> typing.Union[MetaOapg.properties.namespace_pathname, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["namespace_pathname"]) -> MetaOapg.properties.namespace_pathname: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -65,7 +70,7 @@ class SchemaForRequestBodyApplicationJson(
     def __new__(
         cls,
         *_args: typing.Union[dict, frozendict.frozendict, ],
-        namespace_pathname: typing.Union[MetaOapg.properties.namespace_pathname, str, schemas.Unset] = schemas.unset,
+        namespace_pathname: typing.Union[MetaOapg.properties.namespace_pathname, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':

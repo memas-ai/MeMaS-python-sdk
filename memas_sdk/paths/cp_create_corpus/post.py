@@ -38,6 +38,10 @@ class SchemaForRequestBodyApplicationJson(
 
 
     class MetaOapg:
+        required = {
+            "corpus_pathname",
+            "corpus_type",
+        }
         
         class properties:
             corpus_pathname = schemas.StrSchema
@@ -49,6 +53,9 @@ class SchemaForRequestBodyApplicationJson(
                 "corpus_pathname": corpus_pathname,
                 "corpus_type": corpus_type,
             }
+    
+    corpus_pathname: MetaOapg.properties.corpus_pathname
+    corpus_type: 'CorpusType'
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["corpus_pathname"]) -> MetaOapg.properties.corpus_pathname: ...
@@ -65,10 +72,10 @@ class SchemaForRequestBodyApplicationJson(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["corpus_pathname"]) -> typing.Union[MetaOapg.properties.corpus_pathname, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["corpus_pathname"]) -> MetaOapg.properties.corpus_pathname: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["corpus_type"]) -> typing.Union['CorpusType', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["corpus_type"]) -> 'CorpusType': ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -80,8 +87,8 @@ class SchemaForRequestBodyApplicationJson(
     def __new__(
         cls,
         *_args: typing.Union[dict, frozendict.frozendict, ],
-        corpus_pathname: typing.Union[MetaOapg.properties.corpus_pathname, str, schemas.Unset] = schemas.unset,
-        corpus_type: typing.Union['CorpusType', schemas.Unset] = schemas.unset,
+        corpus_pathname: typing.Union[MetaOapg.properties.corpus_pathname, str, ],
+        corpus_type: 'CorpusType',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':

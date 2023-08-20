@@ -3,7 +3,7 @@
 """
     MeMaS CP APIs
 
-    This is the Control Plane APIs for MeMaS (Memory Management Service).  # noqa: E501
+    This is the Control Plane client for MeMaS (Memory Management Service).  See https://github.com/memas-ai/MeMaS for more details.  # noqa: E501
 
     The version of the OpenAPI document: 0.1.0
     Contact: max.yu@memas.ai
@@ -361,7 +361,7 @@ class Configuration(object):
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 0.1.0\n"\
-               "SDK Package Version: 1.0.0".\
+               "SDK Package Version: 0.1.1".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

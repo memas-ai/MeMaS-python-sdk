@@ -1,8 +1,6 @@
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
-README.md
 docs/apis/tags/CpApi.md
 docs/models/CorpusPathname.md
 docs/models/CorpusType.md
@@ -24,13 +22,7 @@ memas_sdk/model/namespace_pathname.pyi
 memas_sdk/models/__init__.py
 memas_sdk/rest.py
 memas_sdk/schemas.py
-requirements.txt
-setup.cfg
-setup.py
 test-requirements.txt
 test/__init__.py
 test/test_models/__init__.py
-test/test_models/test_corpus_pathname.py
-test/test_models/test_corpus_type.py
-test/test_models/test_namespace_pathname.py
 tox.ini

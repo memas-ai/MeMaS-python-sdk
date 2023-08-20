@@ -71,8 +71,8 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**corpus_pathname** | str,  | str,  | full corpus name | [optional] 
-**corpus_type** | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) |  | [optional] 
+**corpus_pathname** | str,  | str,  | full corpus name | 
+**corpus_type** | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) |  | 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 ### Return Types, Responses
@@ -169,7 +169,7 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**namespace_pathname** | str,  | str,  | \&quot;Full namespace name, where child namespaces are appended after their parents&#x27; names with &#x27;.&#x27;\&quot; | [optional] 
+**namespace_pathname** | str,  | str,  | Full namespace name, where child namespaces are appended after their parents&#x27; names with &#x27;.&#x27; | 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 ### Return Types, Responses
