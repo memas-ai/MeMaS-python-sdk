@@ -21,6 +21,8 @@ Create a corpus under a namespace
 ```python
 import memas_sdk
 from memas_sdk.apis.tags import cp_api
+from memas_sdk.model.namespace_exist_error import NamespaceExistError
+from memas_sdk.model.namespace_illegal_name_error import NamespaceIllegalNameError
 from memas_sdk.model.corpus_type import CorpusType
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
@@ -81,6 +83,7 @@ Code | Class | Description
 ------------- | ------------- | -------------
 n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
 200 | [ApiResponseFor200](#create_corpus.ApiResponseFor200) | Successful Operation
+400 | [ApiResponseFor400](#create_corpus.ApiResponseFor400) | Failed operation
 
 #### create_corpus.ApiResponseFor200
 Name | Type | Description  | Notes
@@ -102,6 +105,27 @@ Key | Input Type | Accessed Type | Description | Notes
 **success** | bool,  | BoolClass,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
+#### create_corpus.ApiResponseFor400
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor400ResponseBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO |  | 
+
+### Composed Schemas (allOf/anyOf/oneOf/not)
+#### oneOf
+Class Name | Input Type | Accessed Type | Description | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+[NamespaceExistError]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) |  | 
+[NamespaceIllegalNameError]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) |  | 
+
 ### Authorization
 
 No authorization required
@@ -121,6 +145,8 @@ Create a namespace user
 ```python
 import memas_sdk
 from memas_sdk.apis.tags import cp_api
+from memas_sdk.model.namespace_exist_error import NamespaceExistError
+from memas_sdk.model.namespace_illegal_name_error import NamespaceIllegalNameError
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
@@ -178,6 +204,7 @@ Code | Class | Description
 ------------- | ------------- | -------------
 n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
 200 | [ApiResponseFor200](#create_user.ApiResponseFor200) | Successful Operation
+400 | [ApiResponseFor400](#create_user.ApiResponseFor400) | Failed operation
 
 #### create_user.ApiResponseFor200
 Name | Type | Description  | Notes
@@ -198,6 +225,27 @@ Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
 **success** | bool,  | BoolClass,  |  | [optional] 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
+
+#### create_user.ApiResponseFor400
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor400ResponseBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader,  | frozendict.frozendict, str, decimal.Decimal, BoolClass, NoneClass, tuple, bytes, FileIO |  | 
+
+### Composed Schemas (allOf/anyOf/oneOf/not)
+#### oneOf
+Class Name | Input Type | Accessed Type | Description | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+[NamespaceExistError]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) |  | 
+[NamespaceIllegalNameError]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) |  | 
 
 ### Authorization
 

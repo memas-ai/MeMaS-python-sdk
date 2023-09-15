@@ -13,4 +13,7 @@
 
 from memas_sdk.model.corpus_pathname import CorpusPathname
 from memas_sdk.model.corpus_type import CorpusType
+from memas_sdk.model.namespace_does_not_exist_error import NamespaceDoesNotExistError
+from memas_sdk.model.namespace_exist_error import NamespaceExistError
+from memas_sdk.model.namespace_illegal_name_error import NamespaceIllegalNameError
 from memas_sdk.model.namespace_pathname import NamespacePathname
