@@ -5,8 +5,10 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_corpus**](#create_corpus) | **post** /cp/create_corpus | Create corpus
-[**create_user**](#create_user) | **post** /cp/create_user | Create user
+[**create_corpus**](#create_corpus) | **post** /cp/corpus | Create corpus
+[**create_user**](#create_user) | **post** /cp/user | Create user
+[**delete_corpus**](#delete_corpus) | **delete** /cp/corpus | Delete corpus
+[**delete_user**](#delete_user) | **delete** /cp/user | Delete user
 
 # **create_corpus**
 <a id="create_corpus"></a>
@@ -38,7 +40,8 @@ with memas_sdk.ApiClient(configuration) as api_client:
 
     # example passing only required values which don't have defaults set
     body = dict(
-        corpus_pathname="memas.wikipedia",
+        namespace_pathname="memas.chatbot.persona1",
+        corpus_pathname="memas:wikipedia",
         corpus_type=CorpusType("knowledge"),
     )
     try:
@@ -73,8 +76,9 @@ dict, frozendict.frozendict,  | frozendict.frozendict,  |  |
 ### Dictionary Keys
 Key | Input Type | Accessed Type | Description | Notes
 ------------ | ------------- | ------------- | ------------- | -------------
-**corpus_pathname** | str,  | str,  | full corpus name | 
+**corpus_pathname** | str,  | str,  | Full name of a corpus, specifying which namespace the corpus is under.  The name takes on the format of \\\&quot;&lt;namespace_pathname&gt;:&lt;corpus_name&gt;\\\&quot; | 
 **corpus_type** | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) | [**CorpusType**]({{complexTypePrefix}}CorpusType.md) |  | 
+**namespace_pathname** | str,  | str,  | Full namespace name, where child namespaces are appended after their parents&#x27; names with &#x27;.&#x27; | 
 **any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
 
 ### Return Types, Responses
@@ -246,6 +250,232 @@ Class Name | Input Type | Accessed Type | Description | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 [NamespaceExistError]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) | [**NamespaceExistError**]({{complexTypePrefix}}NamespaceExistError.md) |  | 
 [NamespaceIllegalNameError]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) | [**NamespaceIllegalNameError**]({{complexTypePrefix}}NamespaceIllegalNameError.md) |  | 
+
+### Authorization
+
+No authorization required
+
+[[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
+
+# **delete_corpus**
+<a id="delete_corpus"></a>
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_corpus(any_type)
+
+Delete corpus
+
+Delete a corpus under a namespace
+
+### Example
+
+```python
+import memas_sdk
+from memas_sdk.apis.tags import cp_api
+from memas_sdk.model.namespace_does_not_exist_error import NamespaceDoesNotExistError
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = memas_sdk.Configuration(
+    host = "http://localhost"
+)
+
+# Enter a context with an instance of the API client
+with memas_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cp_api.CpApi(api_client)
+
+    # example passing only required values which don't have defaults set
+    body = dict(
+        namespace_pathname="memas.chatbot.persona1",
+        corpus_pathname="memas:wikipedia",
+    )
+    try:
+        # Delete corpus
+        api_response = api_instance.delete_corpus(
+            body=body,
+        )
+        pprint(api_response)
+    except memas_sdk.ApiException as e:
+        print("Exception when calling CpApi->delete_corpus: %s\n" % e)
+```
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+body | typing.Union[SchemaForRequestBodyApplicationJson] | required |
+content_type | str | optional, default is 'application/json' | Selects the schema and serialization of the request body
+accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
+stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
+timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
+skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### body
+
+# SchemaForRequestBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict,  | frozendict.frozendict,  |  | 
+
+### Dictionary Keys
+Key | Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | ------------- | -------------
+**corpus_pathname** | str,  | str,  | Full name of a corpus, specifying which namespace the corpus is under.  The name takes on the format of \\\&quot;&lt;namespace_pathname&gt;:&lt;corpus_name&gt;\\\&quot; | 
+**namespace_pathname** | str,  | str,  | Full namespace name, where child namespaces are appended after their parents&#x27; names with &#x27;.&#x27; | 
+**any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
+
+### Return Types, Responses
+
+Code | Class | Description
+------------- | ------------- | -------------
+n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
+200 | [ApiResponseFor200](#delete_corpus.ApiResponseFor200) | Successful Operation
+400 | [ApiResponseFor400](#delete_corpus.ApiResponseFor400) | Failed operation
+
+#### delete_corpus.ApiResponseFor200
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor200ResponseBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict,  | frozendict.frozendict,  |  | 
+
+### Dictionary Keys
+Key | Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | ------------- | -------------
+**success** | bool,  | BoolClass,  |  | [optional] 
+**any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
+
+#### delete_corpus.ApiResponseFor400
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor400ResponseBodyApplicationJson
+Type | Description  | Notes
+------------- | ------------- | -------------
+[**NamespaceDoesNotExistError**](../../models/NamespaceDoesNotExistError.md) |  | 
+
+
+### Authorization
+
+No authorization required
+
+[[Back to top]](#__pageTop) [[Back to API list]](../../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../../README.md#documentation-for-models) [[Back to README]](../../../README.md)
+
+# **delete_user**
+<a id="delete_user"></a>
+> {str: (bool, date, datetime, dict, float, int, list, str, none_type)} delete_user(any_type)
+
+Delete user
+
+Delete a namespace user
+
+### Example
+
+```python
+import memas_sdk
+from memas_sdk.apis.tags import cp_api
+from memas_sdk.model.namespace_does_not_exist_error import NamespaceDoesNotExistError
+from pprint import pprint
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = memas_sdk.Configuration(
+    host = "http://localhost"
+)
+
+# Enter a context with an instance of the API client
+with memas_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = cp_api.CpApi(api_client)
+
+    # example passing only required values which don't have defaults set
+    body = dict(
+        namespace_pathname="memas.chatbot.persona1",
+    )
+    try:
+        # Delete user
+        api_response = api_instance.delete_user(
+            body=body,
+        )
+        pprint(api_response)
+    except memas_sdk.ApiException as e:
+        print("Exception when calling CpApi->delete_user: %s\n" % e)
+```
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+body | typing.Union[SchemaForRequestBodyApplicationJson] | required |
+content_type | str | optional, default is 'application/json' | Selects the schema and serialization of the request body
+accept_content_types | typing.Tuple[str] | default is ('application/json', ) | Tells the server the content type(s) that are accepted by the client
+stream | bool | default is False | if True then the response.content will be streamed and loaded from a file like object. When downloading a file, set this to True to force the code to deserialize the content to a FileSchema file
+timeout | typing.Optional[typing.Union[int, typing.Tuple]] | default is None | the timeout used by the rest client
+skip_deserialization | bool | default is False | when True, headers and body will be unset and an instance of api_client.ApiResponseWithoutDeserialization will be returned
+
+### body
+
+# SchemaForRequestBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict,  | frozendict.frozendict,  |  | 
+
+### Dictionary Keys
+Key | Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | ------------- | -------------
+**namespace_pathname** | str,  | str,  | Full namespace name, where child namespaces are appended after their parents&#x27; names with &#x27;.&#x27; | 
+**any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
+
+### Return Types, Responses
+
+Code | Class | Description
+------------- | ------------- | -------------
+n/a | api_client.ApiResponseWithoutDeserialization | When skip_deserialization is True this response is returned
+200 | [ApiResponseFor200](#delete_user.ApiResponseFor200) | Successful Operation
+400 | [ApiResponseFor400](#delete_user.ApiResponseFor400) | Failed operation
+
+#### delete_user.ApiResponseFor200
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor200ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor200ResponseBodyApplicationJson
+
+## Model Type Info
+Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+dict, frozendict.frozendict,  | frozendict.frozendict,  |  | 
+
+### Dictionary Keys
+Key | Input Type | Accessed Type | Description | Notes
+------------ | ------------- | ------------- | ------------- | -------------
+**success** | bool,  | BoolClass,  |  | [optional] 
+**any_string_name** | dict, frozendict.frozendict, str, date, datetime, int, float, bool, decimal.Decimal, None, list, tuple, bytes, io.FileIO, io.BufferedReader | frozendict.frozendict, str, BoolClass, decimal.Decimal, NoneClass, tuple, bytes, FileIO | any string name can be used but the value must be the correct type | [optional]
+
+#### delete_user.ApiResponseFor400
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+response | urllib3.HTTPResponse | Raw response |
+body | typing.Union[SchemaFor400ResponseBodyApplicationJson, ] |  |
+headers | Unset | headers were not defined |
+
+# SchemaFor400ResponseBodyApplicationJson
+Type | Description  | Notes
+------------- | ------------- | -------------
+[**NamespaceDoesNotExistError**](../../models/NamespaceDoesNotExistError.md) |  | 
+
 
 ### Authorization
 

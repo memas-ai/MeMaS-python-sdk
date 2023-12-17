@@ -12,22 +12,22 @@ from unittest.mock import patch
 import urllib3
 
 import memas_sdk
-from memas_sdk.paths.cp_create_user import post  # noqa: E501
+from memas_sdk.paths.cp_corpus import delete  # noqa: E501
 from memas_sdk import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestCpCreateUser(ApiTestMixin, unittest.TestCase):
+class TestCpCorpus(ApiTestMixin, unittest.TestCase):
     """
-    CpCreateUser unit test stubs
-        Create user  # noqa: E501
+    CpCorpus unit test stubs
+        Delete corpus  # noqa: E501
     """
     _configuration = configuration.Configuration()
 
     def setUp(self):
         used_api_client = api_client.ApiClient(configuration=self._configuration)
-        self.api = post.ApiForpost(api_client=used_api_client)  # noqa: E501
+        self.api = delete.ApiFordelete(api_client=used_api_client)  # noqa: E501
 
     def tearDown(self):
         pass

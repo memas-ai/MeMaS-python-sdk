@@ -6,5 +6,7 @@ import enum
 
 
 class PathValues(str, enum.Enum):
-    CP_CREATE_USER = "/cp/create_user"
-    CP_CREATE_CORPUS = "/cp/create_corpus"
+    DP_MEMORIZE = "/dp/memorize"
+    DP_RECALL = "/dp/recall"
+    CP_USER = "/cp/user"
+    CP_CORPUS = "/cp/corpus"

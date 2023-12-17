@@ -11,6 +11,8 @@
 # import sys
 # sys.setrecursionlimit(n)
 
+from memas_sdk.model.citation import Citation
+from memas_sdk.model.cited_document import CitedDocument
 from memas_sdk.model.corpus_pathname import CorpusPathname
 from memas_sdk.model.corpus_type import CorpusType
 from memas_sdk.model.namespace_does_not_exist_error import NamespaceDoesNotExistError

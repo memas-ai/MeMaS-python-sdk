@@ -1,8 +1,10 @@
 .gitignore
 .gitlab-ci.yml
 .travis.yml
-README.md
 docs/apis/tags/CpApi.md
+docs/apis/tags/DpApi.md
+docs/models/Citation.md
+docs/models/CitedDocument.md
 docs/models/CorpusPathname.md
 docs/models/CorpusType.md
 docs/models/NamespaceDoesNotExistError.md
@@ -14,9 +16,14 @@ memas_sdk/__init__.py
 memas_sdk/api_client.py
 memas_sdk/apis/__init__.py
 memas_sdk/apis/tags/cp_api.py
+memas_sdk/apis/tags/dp_api.py
 memas_sdk/configuration.py
 memas_sdk/exceptions.py
 memas_sdk/model/__init__.py
+memas_sdk/model/citation.py
+memas_sdk/model/citation.pyi
+memas_sdk/model/cited_document.py
+memas_sdk/model/cited_document.pyi
 memas_sdk/model/corpus_pathname.py
 memas_sdk/model/corpus_pathname.pyi
 memas_sdk/model/corpus_type.py
@@ -32,9 +39,6 @@ memas_sdk/model/namespace_pathname.pyi
 memas_sdk/models/__init__.py
 memas_sdk/rest.py
 memas_sdk/schemas.py
-requirements.txt
-setup.cfg
-setup.py
 test-requirements.txt
 test/__init__.py
 test/test_models/__init__.py

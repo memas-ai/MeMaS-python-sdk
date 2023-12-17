@@ -25,11 +25,9 @@ import frozendict  # noqa: F401
 
 from memas_sdk import schemas  # noqa: F401
 
-from memas_sdk.model.namespace_exist_error import NamespaceExistError
+from memas_sdk.model.namespace_does_not_exist_error import NamespaceDoesNotExistError
 from memas_sdk.model.namespace_illegal_name_error import NamespaceIllegalNameError
-from memas_sdk.model.corpus_type import CorpusType
-
-from . import path
+from memas_sdk.model.cited_document import CitedDocument
 
 # body param
 
@@ -41,64 +39,61 @@ class SchemaForRequestBodyApplicationJson(
 
     class MetaOapg:
         required = {
+            "clue",
             "corpus_pathname",
-            "corpus_type",
         }
         
         class properties:
+            clue = schemas.StrSchema
             corpus_pathname = schemas.StrSchema
-        
-            @staticmethod
-            def corpus_type() -> typing.Type['CorpusType']:
-                return CorpusType
             __annotations__ = {
+                "clue": clue,
                 "corpus_pathname": corpus_pathname,
-                "corpus_type": corpus_type,
             }
     
+    clue: MetaOapg.properties.clue
     corpus_pathname: MetaOapg.properties.corpus_pathname
-    corpus_type: 'CorpusType'
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["clue"]) -> MetaOapg.properties.clue: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["corpus_pathname"]) -> MetaOapg.properties.corpus_pathname: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["corpus_type"]) -> 'CorpusType': ...
-    
-    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["corpus_pathname", "corpus_type", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["clue", "corpus_pathname", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["corpus_pathname"]) -> MetaOapg.properties.corpus_pathname: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["clue"]) -> MetaOapg.properties.clue: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["corpus_type"]) -> 'CorpusType': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["corpus_pathname"]) -> MetaOapg.properties.corpus_pathname: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["corpus_pathname", "corpus_type", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["clue", "corpus_pathname", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *_args: typing.Union[dict, frozendict.frozendict, ],
+        clue: typing.Union[MetaOapg.properties.clue, str, ],
         corpus_pathname: typing.Union[MetaOapg.properties.corpus_pathname, str, ],
-        corpus_type: 'CorpusType',
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':
         return super().__new__(
             cls,
             *_args,
+            clue=clue,
             corpus_pathname=corpus_pathname,
-            corpus_type=corpus_type,
             _configuration=_configuration,
             **kwargs,
         )
@@ -114,53 +109,29 @@ request_body_any_type = api_client.RequestBody(
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.DictSchema
+    schemas.ListSchema
 ):
 
 
     class MetaOapg:
         
-        class properties:
-            success = schemas.BoolSchema
-            __annotations__ = {
-                "success": success,
-            }
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["success"]) -> MetaOapg.properties.success: ...
-    
-    @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-    
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["success", ], str]):
-        # dict_instance[name] accessor
-        return super().__getitem__(name)
-    
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["success"]) -> typing.Union[MetaOapg.properties.success, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-    
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["success", ], str]):
-        return super().get_item_oapg(name)
-    
+        @staticmethod
+        def items() -> typing.Type['CitedDocument']:
+            return CitedDocument
 
     def __new__(
         cls,
-        *_args: typing.Union[dict, frozendict.frozendict, ],
-        success: typing.Union[MetaOapg.properties.success, bool, schemas.Unset] = schemas.unset,
+        _arg: typing.Union[typing.Tuple['CitedDocument'], typing.List['CitedDocument']],
         _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            *_args,
-            success=success,
+            _arg,
             _configuration=_configuration,
-            **kwargs,
         )
+
+    def __getitem__(self, i: int) -> 'CitedDocument':
+        return super().__getitem__(i)
 
 
 @dataclass
@@ -199,7 +170,7 @@ class SchemaFor400ResponseBodyApplicationJson(
             # classes don't exist yet because their module has not finished
             # loading
             return [
-                NamespaceExistError,
+                NamespaceDoesNotExistError,
                 NamespaceIllegalNameError,
             ]
 
@@ -234,10 +205,6 @@ _response_for_400 = api_client.OpenApiResponse(
             schema=SchemaFor400ResponseBodyApplicationJson),
     },
 )
-_status_code_to_response = {
-    '200': _response_for_200,
-    '400': _response_for_400,
-}
 _all_accept_content_types = (
     'application/json',
 )
@@ -245,7 +212,7 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
     @typing.overload
-    def _create_corpus_oapg(
+    def _recall_oapg(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
@@ -258,7 +225,7 @@ class BaseApi(api_client.Api):
     ]: ...
 
     @typing.overload
-    def _create_corpus_oapg(
+    def _recall_oapg(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -272,7 +239,7 @@ class BaseApi(api_client.Api):
 
 
     @typing.overload
-    def _create_corpus_oapg(
+    def _recall_oapg(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
@@ -283,7 +250,7 @@ class BaseApi(api_client.Api):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def _create_corpus_oapg(
+    def _recall_oapg(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -296,7 +263,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def _create_corpus_oapg(
+    def _recall_oapg(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
@@ -306,7 +273,7 @@ class BaseApi(api_client.Api):
         skip_deserialization: bool = False,
     ):
         """
-        Create corpus
+        Recalls information
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -332,7 +299,7 @@ class BaseApi(api_client.Api):
             _body = serialized_data['body']
         response = self.api_client.call_api(
             resource_path=used_path,
-            method='post'.upper(),
+            method='get'.upper(),
             headers=_headers,
             fields=_fields,
             body=_body,
@@ -359,11 +326,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class CreateCorpus(BaseApi):
+class Recall(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
     @typing.overload
-    def create_corpus(
+    def recall(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
@@ -376,7 +343,7 @@ class CreateCorpus(BaseApi):
     ]: ...
 
     @typing.overload
-    def create_corpus(
+    def recall(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -390,7 +357,7 @@ class CreateCorpus(BaseApi):
 
 
     @typing.overload
-    def create_corpus(
+    def recall(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
@@ -401,7 +368,7 @@ class CreateCorpus(BaseApi):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def create_corpus(
+    def recall(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -414,7 +381,7 @@ class CreateCorpus(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def create_corpus(
+    def recall(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
@@ -423,7 +390,7 @@ class CreateCorpus(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = False,
     ):
-        return self._create_corpus_oapg(
+        return self._recall_oapg(
             body=body,
             content_type=content_type,
             accept_content_types=accept_content_types,
@@ -433,11 +400,11 @@ class CreateCorpus(BaseApi):
         )
 
 
-class ApiForpost(BaseApi):
+class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
     @typing.overload
-    def post(
+    def get(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: typing_extensions.Literal["application/json"] = ...,
@@ -450,7 +417,7 @@ class ApiForpost(BaseApi):
     ]: ...
 
     @typing.overload
-    def post(
+    def get(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -464,7 +431,7 @@ class ApiForpost(BaseApi):
 
 
     @typing.overload
-    def post(
+    def get(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         skip_deserialization: typing_extensions.Literal[True],
@@ -475,7 +442,7 @@ class ApiForpost(BaseApi):
     ) -> api_client.ApiResponseWithoutDeserialization: ...
 
     @typing.overload
-    def post(
+    def get(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = ...,
@@ -488,7 +455,7 @@ class ApiForpost(BaseApi):
         api_client.ApiResponseWithoutDeserialization,
     ]: ...
 
-    def post(
+    def get(
         self,
         body: typing.Union[SchemaForRequestBodyApplicationJson,dict, frozendict.frozendict, ],
         content_type: str = 'application/json',
@@ -497,7 +464,7 @@ class ApiForpost(BaseApi):
         timeout: typing.Optional[typing.Union[int, typing.Tuple]] = None,
         skip_deserialization: bool = False,
     ):
-        return self._create_corpus_oapg(
+        return self._recall_oapg(
             body=body,
             content_type=content_type,
             accept_content_types=accept_content_types,
